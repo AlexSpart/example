@@ -1,2 +1,5 @@
 pyyaml
 opera
+docker 
+jq
+ansible
