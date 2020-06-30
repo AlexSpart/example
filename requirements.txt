@@ -1,5 +1,6 @@
 pyyaml
 opera
 docker 
+docker-compose
 jq
 ansible
