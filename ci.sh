@@ -32,10 +32,10 @@ export TI_DEPLOYMENT_URL="http://localhost:${TI_DEPLOYMENT_PORT}"
 #sudo apt-get -y install docker-compose python3 python3-setuptools python3-wheel python3-pip python3-docker python3-apt jq ansible
 python3 -m pip install -r requirements.txt
 python3 -m pip install docker-compose docker jq ansible --user
-
+ls /home/jenkins/.local/bin
 set -e
   # Pull Winery
-docker-compose pull
+/home/jenkins/.local/bin/docker-compose pull
   # Clone Particles
 git clone --single-branch --branch "${PARTICLES_BRANCH}" "${PARTICLES_URL}" "${PARTICLES_DIR}"
 chmod -R a+rwx "${PARTICLES_DIR}"
