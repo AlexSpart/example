@@ -36,6 +36,7 @@ export PATH=/home/jenkins/.local/bin:$PATH
 echo $PATH
 ls /home/jenkins/.local/bin
 
+rm -rf /tmp/radon-particles
 set -e
   # Pull Winery
 docker-compose pull
