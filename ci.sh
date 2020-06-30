@@ -32,7 +32,7 @@ export TI_DEPLOYMENT_URL="http://localhost:${TI_DEPLOYMENT_PORT}"
 #sudo apt-get -y install docker-compose python3 python3-setuptools python3-wheel python3-pip python3-docker python3-apt jq ansible
 python3 -m pip install -r requirements.txt
 python3 -m pip install docker-compose docker jq ansible --user
-export PATH =/home/jenkins/.local/bin:$PATH
+export PATH=/home/jenkins/.local/bin:$PATH
 echo $PATH
 ls /home/jenkins/.local/bin
 
