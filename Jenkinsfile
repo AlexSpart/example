@@ -13,7 +13,7 @@ pipeline {
         }
         stage('call ci.sh') {
             steps {
-                sh 'ci.sh'
+                sh 'sh ci.sh'
                 sh 'echo "finisshh"'
             }
         }
