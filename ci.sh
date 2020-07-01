@@ -76,7 +76,9 @@ echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
 mkdir -p ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
-ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
+cd ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt 
+pwd 
+ls
 
   # CTT: Create Test-Artifact
 export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}")
