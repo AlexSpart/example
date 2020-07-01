@@ -57,7 +57,10 @@ docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PO
   # SockShop
 git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_URL}" "${SOCKSHOP_DEMO_DIR}" || true
   # Obtain SUT CSAR
- sleep 50
+echo "Wait 5 sec..."
+sleep 5
+"curl -H 'Accept: application/xml' -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\""
+#curl -H 'Accept: application/xml' -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\"
 #curl -H 'Accept: application/xml' -o /tmp/sut.csar http://127.0.0.1:18080/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar
 #curl -H 'Accept: application/xml' -o "${SUT_CSAR}" "${SUT_EXPORT_URL}"
 curl -H "Accept: application/xml" -o ${SUT_CSAR} ${SUT_EXPORT_URL}
