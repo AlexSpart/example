@@ -3,21 +3,21 @@ export GMT_DOCKER_COMPOSE_URL="https://github.com/radon-h2020/radon-gmt/blob/pro
 export GMT_HTTP_PORT="18080"
 export PARTICLES_URL="https://github.com/radon-h2020/radon-particles.git"
 export PARTICLES_BRANCH="master"
-export PARTICLES_DIR="/tmp/radon-particles"
+export PARTICLES_DIR="${WORKSPACE}/radon-particles"
 export CTT_DOCKER_NAME="RadonCTT"
 export CTT_SERVER_DOCKER="radonconsortium/radon-ctt"
-export CTT_VOLUME="/tmp/RadonCTT"
+export CTT_VOLUME="${WORKSPACE}/RadonCTT"
 export CTT_PORT="18080"
 export CTT_EXT_PORT="7999"
 export CTT_ENDPOINT="http://localhost:${CTT_EXT_PORT}/RadonCTT"
-export CTT_RESULT_FILE="/tmp/result.zip"
+export CTT_RESULT_FILE="${WORKSPACE}/result.zip"
 export SOCKSHOP_DEMO_URL="https://github.com/radon-h2020/demo-ctt-sockshop.git"
 export SOCKSHOP_DEMO_BRANCH="master"
-export SOCKSHOP_DEMO_DIR="/tmp/demo-ctt-sockshop"
+export SOCKSHOP_DEMO_DIR="${WORKSPACE}/demo-ctt-sockshop"
 export SUT_CSAR_FN="sut.csar"
-export SUT_CSAR="/tmp/${SUT_CSAR_FN}"
+export SUT_CSAR="${WORKSPACE}/${SUT_CSAR_FN}"
 export TI_CSAR_FN="ti.csar"
-export TI_CSAR="/tmp/${TI_CSAR_FN}"
+export TI_CSAR="${WORKSPACE}/${TI_CSAR_FN}"
     
 
 export NAME="CTT-master"
@@ -61,7 +61,7 @@ mkdir ${CTT_VOLUME} || echo "the ${CTT_VOLUME} already exists"
   # Remove docker 'RadonCTT' from previous build
 #docker rm -f $(docker ps -a -q) || true
 docker rm -f ${CTT_DOCKER_NAME} || true
-docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:/tmp/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
+docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:${WORKSPACE}/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
 sleep 20
   # SockShop
 git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_URL}" "${SOCKSHOP_DEMO_DIR}" || true
