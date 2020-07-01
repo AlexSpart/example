@@ -43,6 +43,9 @@ ls /home/jenkins/.local/bin
 
 pwd 
 ls -a
+mkdir px 
+cd px && pwd
+ls 'l /tmp
 
 set -e
   # Pull Winery
