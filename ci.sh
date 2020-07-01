@@ -70,7 +70,7 @@ docker-compose rm -fsv
   # CTT: Create Project
  #DOWN is the one that works
 #export CTT_PROJECT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/project\" \"{\\\"name\\\":\\\"use-case-radon-demo\\\",\\\"repository_url\\\":\\\"${REPO_DEMO_URL}\\\"}\")
-export CTT_PROJECT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/project\" \"{\\\"name\\\":\\\"SockShop\\\",\\\"repository_url\\\":\\\"${SOCKSHOP_DEMO_URL}\\\"}\")
+export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project" "{\\\"name\\\":\\\"SockShop\\\",\\\"repository_url\\\":\\\"${SOCKSHOP_DEMO_URL}\\\"}")
 echo "CTT_PROJECT_UUID: ${WORKSPACE}"
 echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
