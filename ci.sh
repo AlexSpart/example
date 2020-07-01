@@ -81,10 +81,8 @@ pwd
 ls
 
   # CTT: Create Test-Artifact
-export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/sut.csar\",\"ti_tosca_path\":\"radon-ctt/ti.csar\"}")
-echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
-export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}")
-echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
+curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}"
+curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/sut.csar\",\"ti_tosca_path\":\"radon-ctt/ti.csar\"}"
 export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}")
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
