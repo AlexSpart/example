@@ -69,16 +69,13 @@ echo "${TI_CSAR} available at: `curl -F "file=@${TI_CSAR}" "https://file.io/?exp
 docker-compose rm -fsv
   # CTT: Create Project
  #DOWN is the one that works
-#export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project" "{\\\"name\\\":\\\"SockShop\\\",\\\"repository_url\\\":\\\"${SOCKSHOP_DEMO_URL}\\\"}")
-export CTT_PROJECT_UUID=$(curl -X POST "${CTT_ENDPOINT}/project" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"use-case-radon-demo-AlexSpart\",\"repository_url\":\"https://github.com/AlexSpart/use-case-radon-demo.git\"}")
-#export CTT_PROJECT_UUID=$(curl -X POST "${CTT_ENDPOINT}/project" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
+#export CTT_PROJECT_UUID=$(curl -X POST "${CTT_ENDPOINT}/project" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"use-case-radon-demo-AlexSpart\",\"repository_url\":\"https://github.com/AlexSpart/use-case-radon-demo.git\"}")
+export CTT_PROJECT_UUID=$(curl -X POST "${CTT_ENDPOINT}/project" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
 export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project"  "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
-
-
 echo "CTT_PROJECT_UUID: ${WORKSPACE}"
 echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
-#sudo cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
+cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
   # CTT: Create Test-Artifact
 export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/testartifact\" \"{\\\"project_uuid\\\":\\\"${CTT_PROJECT_UUID}\\\",\\\"sut_tosca_path\\\":\\\"radon-ctt/${SUT_CSAR_FN}\\\",\\\"ti_tosca_path\\\":\\\"radon-ctt/${TI_CSAR_FN}\\\"}\")
   # CTT: Create Deployment
