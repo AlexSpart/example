@@ -37,9 +37,10 @@ echo $PATH
 ls /home/jenkins/.local/bin
 
 echo "remove direcotries from previous builds"
-rm -rf /tmp/radon-particles
-rm -rf /tmp/RadonCTT
-rm -rf /tmp/demo-ctt-sockshop
+chmod 777 /tmp/RadonCTT
+rm -rf /tmp/radon-particles && echo "Deleted radon-particles directory..."
+rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
+rm -rf /tmp/demo-ctt-sockshop && echo "Deleted demo-ctt-sockshop directory..."
 
 set -e
   # Pull Winery
