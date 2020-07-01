@@ -69,8 +69,9 @@ echo "${TI_CSAR} available at: `curl -F "file=@${TI_CSAR}" "https://file.io/?exp
 docker-compose rm -fsv
   # CTT: Create Project
 export CTT_PROJECT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/project\" \"{\\\"name\\\":\\\"SockShop\\\",\\\"repository_url\\\":\\\"${SOCKSHOP_DEMO_URL}\\\"}\")
+echo $CTT_PROJECT_UUID
   # Copy CSARs into project
-sudo cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
+#sudo cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
   # CTT: Create Test-Artifact
 export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/testartifact\" \"{\\\"project_uuid\\\":\\\"${CTT_PROJECT_UUID}\\\",\\\"sut_tosca_path\\\":\\\"radon-ctt/${SUT_CSAR_FN}\\\",\\\"ti_tosca_path\\\":\\\"radon-ctt/${TI_CSAR_FN}\\\"}\")
   # CTT: Create Deployment
