@@ -34,7 +34,7 @@ python3 -m pip install -r requirements.txt
 python3 -m pip install docker-compose docker jq ansible --user
 export PATH=/home/jenkins/.local/bin:$PATH
 echo $PATH
-ls /home/jenkins/.local/bin
+#ls /home/jenkins/.local/bin
 
 #echo "remove direcotries from previous builds"
 #rm -rf /tmp/radon-particles && echo "Deleted radon-particles directory..."
@@ -45,7 +45,8 @@ pwd
 ls -a
 mkdir px 
 cd px && pwd
-ls 'l /tmp
+ls -l /tmp
+printenv
 
 set -e
   # Pull Winery
