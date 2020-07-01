@@ -52,7 +52,7 @@ docker-compose up -d
   # Start CTT server
 mkdir ${CTT_VOLUME} 
   # Remove docker 'RadonCTT' from previous build
-#docker rm -f ${CTT_DOCKER_NAME} || true
+docker rm -f ${CTT_DOCKER_NAME} || true
 docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:${WORKSPACE}/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
   # SockShop
 git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_URL}" "${SOCKSHOP_DEMO_DIR}" || true
