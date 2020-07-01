@@ -60,12 +60,11 @@ git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_UR
 echo "Wait 5 sec..."
 sleep 5
 curl -H "Accept: application/xml" -o "${SUT_CSAR}" "${SUT_EXPORT_URL}"
-ls
 echo "${SUT_CSAR} available at: `curl -F "file=@${SUT_CSAR}" "https://file.io/?expires=1w" | jq -e ".link" `"
-echo "giname?"
   # Obtain TI CSAR
-curl -H 'Accept: application/xml' -o \"${TI_CSAR}\" \"${TI_EXPORT_URL}\"
-echo \"${TI_CSAR} available at: `curl -F \"file=@${TI_CSAR}\" \"https://file.io/?expires=1w\" | jq -e '.link'`\"
+curl -H 'Accept: application/xml' -o "${TI_CSAR}" "${TI_EXPORT_URL}"
+ls
+echo "${TI_CSAR} available at: `curl -F "file=@${TI_CSAR}" "https://file.io/?expires=1w" | jq -e '.link' `"
   # Shutdown Winery
 docker-compose rm -fsv
   # CTT: Create Project
