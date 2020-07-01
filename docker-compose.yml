@@ -10,6 +10,6 @@ services:
       WINERY_FEATURE_RADON: "true"
       WINERY_REPOSITORY_PROVIDER: "yaml"
     volumes:
-      - /tmp/radon-particles:/var/repository
+      - ${WORKSPACE}/radon-particles:/var/repository
     ports:
       - '18080:8080'
