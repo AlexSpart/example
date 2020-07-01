@@ -37,9 +37,8 @@ echo $PATH
 ls /home/jenkins/.local/bin
 
 echo "remove direcotries from previous builds"
-chmod 777 /tmp
 rm -rf /tmp/radon-particles && echo "Deleted radon-particles directory..."
-rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
+#rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
 rm -rf /tmp/demo-ctt-sockshop && echo "Deleted demo-ctt-sockshop directory..."
 
 set -e
@@ -52,8 +51,10 @@ chmod -R a+rwx "${PARTICLES_DIR}"
 docker-compose up -d
   # Start CTT server
 mkdir ${CTT_VOLUME} || echo "the ${CTT_VOLUME} already exists"
+chmod -R a+rwx "${PARTICLES_DIR}"
   # Remove docker 'RadonCTT' from previous build
-sh 'docker rm -f ${CTT_DOCKER_NAME} || true'
+#docker rm -f $(docker ps -a -q) || true
+docker rm -f ${CTT_DOCKER_NAME} || true
 docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:/tmp/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
 sleep 20
   # 
