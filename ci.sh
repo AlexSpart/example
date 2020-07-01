@@ -41,6 +41,9 @@ ls /home/jenkins/.local/bin
 #rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
 #rm -rf /tmp/demo-ctt-sockshop && echo "Deleted demo-ctt-sockshop directory..."
 
+pwd 
+ls -a
+
 set -e
   # Pull Winery
 docker-compose pull
