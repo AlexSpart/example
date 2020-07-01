@@ -61,7 +61,7 @@ echo "Wait 5 sec..."
 sleep 5
 #"curl -H 'Accept: application/xml' -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\""
 #curl -H 'Accept: application/xml' -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\"
-curl -H "Accept: application/xml" -o "/tmp/sut.csar" "http://127.0.0.1:18080/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
+#curl -H "Accept: application/xml" -o "/tmp/sut.csar" "http://127.0.0.1:18080/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
 curl -H "Accept: application/xml" -o "${WORKSPACE}/sut.csar" "http://127.0.0.1:18080/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
 ls
 #curl -H 'Accept: application/xml' -o "${SUT_CSAR}" "${SUT_EXPORT_URL}"
