@@ -59,12 +59,12 @@ git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_UR
   # Obtain SUT CSAR
 echo "Wait 5 sec..."
 sleep 5
-#"curl -H 'Accept: application/xml' -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\""
-#curl -H "Accept: application/xml" -o \"${SUT_CSAR}\" \"${SUT_EXPORT_URL}\"
 curl -H "Accept: application/xml" -o "${SUT_CSAR}" "${SUT_EXPORT_URL}"
 #curl -H "Accept: application/xml" -o "${WORKSPACE}/sut.csar" "http://127.0.0.1:18080/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
 ls
-echo \"${SUT_CSAR} available at: `curl -F \"file=@${SUT_CSAR}\" \"https://file.io/?expires=1w\" | jq -e '.link'`\"
+echo "${SUT_CSAR} available at: `curl curl -F "file=@{SUT_CSAR}" "https://file.io/?expires=1w\" | jq -e '.link' `"
+#echo "${SUT_CSAR} available at: `curl -F \"file=@${SUT_CSAR}\" \"https://file.io/?expires=1w\" | jq -e '.link'`\"
+echo "giname?"
   # Obtain TI CSAR
 curl -H 'Accept: application/xml' -o \"${TI_CSAR}\" \"${TI_EXPORT_URL}\"
 echo \"${TI_CSAR} available at: `curl -F \"file=@${TI_CSAR}\" \"https://file.io/?expires=1w\" | jq -e '.link'`\"
