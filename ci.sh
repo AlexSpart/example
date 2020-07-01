@@ -36,10 +36,10 @@ export PATH=/home/jenkins/.local/bin:$PATH
 echo $PATH
 ls /home/jenkins/.local/bin
 
-echo "remove direcotries from previous builds"
-rm -rf /tmp/radon-particles && echo "Deleted radon-particles directory..."
-rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
-rm -rf /tmp/demo-ctt-sockshop && echo "Deleted demo-ctt-sockshop directory..."
+#echo "remove direcotries from previous builds"
+#rm -rf /tmp/radon-particles && echo "Deleted radon-particles directory..."
+#rm -rf /tmp/RadonCTT && echo "Deleted RadonCTT directory..."
+#rm -rf /tmp/demo-ctt-sockshop && echo "Deleted demo-ctt-sockshop directory..."
 
 set -e
   # Pull Winery
@@ -51,7 +51,7 @@ chmod -R a+rwx "${PARTICLES_DIR}"
 docker-compose up -d
   # Start CTT server
 mkdir ${CTT_VOLUME} || echo "the ${CTT_VOLUME} already exists"
-chmod -R a+rwx "${PARTICLES_DIR}"
+chmod -R a+rwx "${CTT_VOLUME}"
   # Remove docker 'RadonCTT' from previous build
 #docker rm -f $(docker ps -a -q) || true
 docker rm -f ${CTT_DOCKER_NAME} || true
