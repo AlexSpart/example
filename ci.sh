@@ -68,7 +68,10 @@ echo "${TI_CSAR} available at: `curl -F "file=@${TI_CSAR}" "https://file.io/?exp
   # Shutdown Winery
 docker-compose rm -fsv
   # CTT: Create Project
-export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project" "{"name":"SockShop","repository_url":"${SOCKSHOP_DEMO_URL}"}")
+ #DOWN is the one that works
+#export CTT_PROJECT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/project\" \"{\\\"name\\\":\\\"use-case-radon-demo\\\",\\\"repository_url\\\":\\\"${REPO_DEMO_URL}\\\"}\")
+export CTT_PROJECT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/project\" \"{\\\"name\\\":\\\"SockShop\\\",\\\"repository_url\\\":\\\"${SOCKSHOP_DEMO_URL}\\\"}\")
+echo "CTT_PROJECT_UUID: ${WORKSPACE}"
 echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
 #sudo cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
@@ -77,7 +80,7 @@ export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/testartifact\" \
   # CTT: Create Deployment
 export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  \"${CTT_ENDPOINT}/deployment\" \"{\\\"testartifact_uuid\\\":\\\"${CTT_TESTARTIFACT_UUID}\\\"}\")
   # Give deployments some time to succeed.
-sleep 120
+sleep 12
 echo \"DEPLOYMENT_UUID: ${CTT_DEPLOYMENT_UUID}\"
   # Check SUT Deployment
 export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${SUT_DEPLOYMENT_URL}\")
