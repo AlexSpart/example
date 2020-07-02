@@ -86,7 +86,9 @@ mkdir -p ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 echo "ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt......."
 ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 
-cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt"
+#cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt"
+cp -a  "${WORKSPACE}/demo-ctt-sockshop/radon-ctt/." "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt"
+
 echo "ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt......."
 ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 
