@@ -70,19 +70,20 @@ docker-compose rm -fsv
   # CTT: Create Project
  #DOWN is the one that works
 export CTT_PROJECT_UUID=$(curl -X POST "${CTT_ENDPOINT}/project" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
+echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
 export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project"  "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
 echo "CTT_PROJECT_UUID: ${WORKSPACE}"
 echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
 mkdir -p ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/."
-cd ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt 
+#cd ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt 
 pwd 
 ls
 
   # CTT: Create Test-Artifact
 export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project"  "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
-echo "2n time --- CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
+echo "2n time ----- CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
 export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/testartifact\" \"{\\\"project_uuid\\\":\\\"${CTT_PROJECT_UUID}\\\",\\\"sut_tosca_path\\\":\\\"radon-ctt/${SUT_CSAR_FN}\\\",\\\"ti_tosca_path\\\":\\\"radon-ctt/${TI_CSAR_FN}\\\"}\")
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
