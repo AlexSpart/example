@@ -110,4 +110,7 @@ unzip -q "${CTT_RESULT_FILE}" -d result
 ls -al result
 set +e
 
+docker logs "${CTT_DOCKER_NAME}" | tee ctt_docker.log
+echo "CTT logs available at: `curl -F "file=@ctt_docker.log" "https://file.io/?expires=1w" | jq -e ".link" `"
+
 docker logs RadonCTT
