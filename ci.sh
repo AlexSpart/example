@@ -21,7 +21,7 @@ export TI_CSAR="${WORKSPACE}/${TI_CSAR_FN}"
     
 
 export NAME="CTT-master"
-export CTT_SERVER_DOCKER_TAG="dev"
+export CTT_SERVER_DOCKER_TAG="latest"
 export SUT_EXPORT_URL="http://127.0.0.1:${GMT_HTTP_PORT}/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
 export SUT_DEPLOYMENT_PORT="80"
 export SUT_DEPLOYMENT_URL="http://localhost:${SUT_DEPLOYMENT_PORT}"
@@ -54,8 +54,8 @@ mkdir ${CTT_VOLUME}
   # Remove docker 'RadonCTT' from previous build
 docker rm -f ${CTT_DOCKER_NAME} || true
   # Pull latest docker 'RadonCTT' image
-#docker pull radonconsortium/radon-ctt:latest
-docker pull radonconsortium/radon-ctt:dev
+docker pull radonconsortium/radon-ctt:latest
+#docker pull radonconsortium/radon-ctt:dev
 docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:${WORKSPACE}/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
   # SockShop
 git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_URL}" "${SOCKSHOP_DEMO_DIR}"
