@@ -21,7 +21,7 @@ export TI_CSAR="${WORKSPACE}/${TI_CSAR_FN}"
     
 
 export NAME="CTT-master"
-export CTT_SERVER_DOCKER_TAG="latest"
+export CTT_SERVER_DOCKER_TAG="dev"
 export SUT_EXPORT_URL="http://127.0.0.1:${GMT_HTTP_PORT}/winery/servicetemplates/radon.blueprints/SockShopTestingExample/?yaml&csar"
 export SUT_DEPLOYMENT_PORT="80"
 export SUT_DEPLOYMENT_URL="http://localhost:${SUT_DEPLOYMENT_PORT}"
