@@ -87,7 +87,7 @@ echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 # CTT: Create Deployment
 export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/deployment" "{\"testartifact_uuid\":\"${CTT_TESTARTIFACT_UUID}\"}")
   # Give deployments some time to succeed.
-sleep 60
+sleep 120
 echo "CTT_DEPLOYMENT_UUID: ${CTT_DEPLOYMENT_UUID}"
 
   # Check SUT Deployment
