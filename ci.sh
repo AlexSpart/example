@@ -106,8 +106,8 @@ echo "CTT_RESULT_UUID: ${CTT_RESULT_UUID}"
   # CTT: Obtain Result
 wget "${CTT_ENDPOINT}/result/${CTT_RESULT_UUID}/download" -O "${CTT_RESULT_FILE}" 
 echo "CTT result file available at: `curl -F "file=@${CTT_RESULT_FILE}" "https://file.io/?expires=1w" | jq -e ".link" `"
-unzip -q "${CTT_RESULT_FILE}" "results"
-ls -al "results"
+unzip -q "${CTT_RESULT_FILE}"
+ls -al "result"
 set +e
 
 docker logs RadonCTT
