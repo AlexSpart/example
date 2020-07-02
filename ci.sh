@@ -90,7 +90,7 @@ export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/testartifact"  "
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
 # CTT: Create Deployment
-export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  \"${CTT_ENDPOINT}/deployment\" \"{\\\"testartifact_uuid\\\":\\\"${CTT_TESTARTIFACT_UUID}\\\"}\")
+export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/deployment" "{\"testartifact_uuid\":\"${CTT_TESTARTIFACT_UUID}\"}")
   # Give deployments some time to succeed.
 sleep 120
 echo "CTT_DEPLOYMENT_UUID: ${CTT_DEPLOYMENT_UUID}"
@@ -100,10 +100,10 @@ export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${SUT
 export TI_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${TI_DEPLOYMENT_URL}\")
 echo HTTP Codes: SUT ${SUT_DEPLOYMENT_HTTP}, TI ${TI_DEPLOYMENT_HTTP}
   # CTT: Trigger Execution
-export CTT_EXECUTION_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/execution\" \"{\\\"deployment_uuid\\\":\\\"${CTT_DEPLOYMENT_UUID}\\\"}\")
+export CTT_EXECUTION_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/execution" "{\"deployment_uuid\":\"${CTT_DEPLOYMENT_UUID}\"}")
 sleep 30
   # CTT: Create Result
-export CTT_RESULT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/result\" \"{\\\"execution_uuid\\\":\\\"${CTT_EXECUTION_UUID}\\\"}\")
+export CTT_RESULT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/result" "{\"execution_uuid\":\"${CTT_EXECUTION_UUID}\"}")
 echo "CTT_RESULT_UUID: ${CTT_RESULT_UUID}"
 
   # CTT: Obtain Result
