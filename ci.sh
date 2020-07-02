@@ -54,26 +54,17 @@ mkdir ${CTT_VOLUME}
   # Remove docker 'RadonCTT' from previous build
 docker rm -f ${CTT_DOCKER_NAME} || true
   # Pull latest docker 'RadonCTT' image
-docker pull radonconsortium/radon-ctt:latest
+#docker pull radonconsortium/radon-ctt:latest
 #docker pull radonconsortium/radon-ctt:dev
 docker run --name "${CTT_DOCKER_NAME}" -d -p "127.0.0.1:${CTT_EXT_PORT}:${CTT_PORT}" -v /var/run/docker.sock:/var/run/docker.sock -v "${CTT_VOLUME}:${WORKSPACE}/RadonCTT" "${CTT_SERVER_DOCKER}:${CTT_SERVER_DOCKER_TAG}"
   # SockShop
 git clone --single-branch --branch "${SOCKSHOP_DEMO_BRANCH}" "${SOCKSHOP_DEMO_URL}" "${SOCKSHOP_DEMO_DIR}"
   # Obtain SUT CSAR
-pwd
-ls
-echo "Wait 10 sec..."
-sleep 10
 curl -H "Accept: application/xml" -o "${SUT_CSAR}" "${SUT_EXPORT_URL}"
 echo "${SUT_CSAR} available at: `curl -F "file=@${SUT_CSAR}" "https://file.io/?expires=1w" | jq -e ".link" `"
   # Obtain TI CSAR
 curl -H 'Accept: application/xml' -o "${TI_CSAR}" "${TI_EXPORT_URL}"
 echo "${TI_CSAR} available at: `curl -F "file=@${TI_CSAR}" "https://file.io/?expires=1w" | jq -e '.link' `"
-pwd
-ls
-echo "Wait 10 sec..."
-sleep 10
-
   # Shutdown Winery
 docker-compose rm -fsv
   # CTT: Create Project
@@ -84,23 +75,17 @@ echo "CTT_PROJECT_UUID: ${CTT_PROJECT_UUID}"
   # Copy CSARs into project
 pwd
 mkdir -p ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
-echo "ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt......."
-ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
+cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt" #copy the 2 downloaded test csars from workspace to project dir
+#cp -a  "${WORKSPACE}/demo-ctt-sockshop/radon-ctt/." "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt" #copy all files from sockshop dir to the project dir
 
-#cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt"
-cp -a  "${WORKSPACE}/demo-ctt-sockshop/radon-ctt/." "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt"
-
-echo "ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt......."
-ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
-
-echo "Wait 10 sec..."
-sleep 10
-
+echo "Wait 5 sec..."
+sleep 5
   # CTT: Create Test-Artifact
-export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/${TI_CSAR_FN}\"}")
+#export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/${TI_CSAR_FN}\"}")
+export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"radon-ctt/${TI_CSAR_FN}\"}")
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
-sleep 10
+sleep 5
 #export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/testartifact"  "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"radon-ctt/${TI_CSAR_FN}\"}")
 #echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
