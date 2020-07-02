@@ -10,7 +10,7 @@ export CTT_VOLUME="${WORKSPACE}/RadonCTT"
 export CTT_PORT="18080"
 export CTT_EXT_PORT="7999"
 export CTT_ENDPOINT="http://localhost:${CTT_EXT_PORT}/RadonCTT"
-export CTT_RESULT_FILE="${WORKSPACE}/result"
+export CTT_RESULT_FILE="${WORKSPACE}/result.zip"
 export SOCKSHOP_DEMO_URL="https://github.com/radon-h2020/demo-ctt-sockshop.git"
 export SOCKSHOP_DEMO_BRANCH="master"
 export SOCKSHOP_DEMO_DIR="${WORKSPACE}/demo-ctt-sockshop"
@@ -104,10 +104,10 @@ export CTT_RESULT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/result" "{\"execution_u
 echo "CTT_RESULT_UUID: ${CTT_RESULT_UUID}"
 
   # CTT: Obtain Result
-wget "${CTT_ENDPOINT}/result/${CTT_RESULT_UUID}/download" -O "${CTT_RESULT_FILE}.zip" 
+wget "${CTT_ENDPOINT}/result/${CTT_RESULT_UUID}/download" -O "${CTT_RESULT_FILE}" 
 echo "CTT result file available at: `curl -F "file=@${CTT_RESULT_FILE}" "https://file.io/?expires=1w" | jq -e ".link" `"
-unzip "${CTT_RESULT_FILE}.zip"
-ls -al \"${CTT_RESULT_FILE}\"
+unzip -q "${CTT_RESULT_FILE}" results
+ls -al "results"
 set +e
 
 docker logs RadonCTT
