@@ -87,12 +87,15 @@ echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 # CTT: Create Deployment
 export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/deployment" "{\"testartifact_uuid\":\"${CTT_TESTARTIFACT_UUID}\"}")
   # Give deployments some time to succeed.
-sleep 200
+sleep 60
 echo "CTT_DEPLOYMENT_UUID: ${CTT_DEPLOYMENT_UUID}"
 
   # Check SUT Deployment
-export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${SUT_DEPLOYMENT_URL}\")
-export TI_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${TI_DEPLOYMENT_URL}\")
+#export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\" \"${SUT_DEPLOYMENT_URL}\")
+export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w "%{http_code}" "${SUT_DEPLOYMENT_URL}")
+#export TI_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\" \"${TI_DEPLOYMENT_URL}\")
+export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w "%{http_code}" "${TI_DEPLOYMENT_URL}")
+
 echo HTTP Codes: SUT ${SUT_DEPLOYMENT_HTTP}, TI ${TI_DEPLOYMENT_HTTP}
   # CTT: Trigger Execution
 export CTT_EXECUTION_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/execution" "{\"deployment_uuid\":\"${CTT_DEPLOYMENT_UUID}\"}")
