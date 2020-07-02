@@ -82,15 +82,12 @@ ls
 
   # CTT: Create Test-Artifact
 export CTT_PROJECT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/project"  "{\"name\":\"SockShop\",\"repository_url\":\"${SOCKSHOP_DEMO_URL}\"}")
+echo "2n time --- CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/testartifact\" \"{\\\"project_uuid\\\":\\\"${CTT_PROJECT_UUID}\\\",\\\"sut_tosca_path\\\":\\\"radon-ctt/${SUT_CSAR_FN}\\\",\\\"ti_tosca_path\\\":\\\"radon-ctt/${TI_CSAR_FN}\\\"}\")
-
-curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"23c9b5ae-3124-4556-a1ed-e4a115a5dea4\",\"sut_tosca_path\":\"radon-ctt/sut.csar\",\"ti_tosca_path\":\"radon-ctt/ti.csar\"}" 
- 
-curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/sut.csar\",\"ti_tosca_path\":\"radon-ctt/ti.csar\"}"
-curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${WORKSPACE}/sut.csar\",\"ti_tosca_path\":\"${WORKSPACE}/ti.csar\"}"
-curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"sut.csar\",\"ti_tosca_path\":\"ti.csar\"}"
-export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}")
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
+
+
+#export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/sut.csar\",\"ti_tosca_path\":\"${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt/ti.csar\"}")
 
   # CTT: Create Deployment
 export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh "${CTT_ENDPOINT}/deployment" "{\"testartifact_uuid\":\"${CTT_TESTARTIFACT_UUID}\"}")
