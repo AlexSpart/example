@@ -86,7 +86,30 @@ export CTT_TESTARTIFACT_UUID=$(curl -X POST "${CTT_ENDPOINT}/testartifact" -H  "
 echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
 
 sleep 5
-#export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/testartifact"  "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"radon-ctt/${TI_CSAR_FN}\"}")
-#echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
+export CTT_TESTARTIFACT_UUID=$(./curl_uuid.sh  "${CTT_ENDPOINT}/testartifact"  "{\"project_uuid\":\"${CTT_PROJECT_UUID}\",\"sut_tosca_path\":\"radon-ctt/${SUT_CSAR_FN}\",\"ti_tosca_path\":\"radon-ctt/${TI_CSAR_FN}\"}")
+echo "CTT_TESTARTIFACT_UUID: ${CTT_TESTARTIFACT_UUID}"
+
+# CTT: Create Deployment
+export CTT_DEPLOYMENT_UUID=$(./curl_uuid.sh  \"${CTT_ENDPOINT}/deployment\" \"{\\\"testartifact_uuid\\\":\\\"${CTT_TESTARTIFACT_UUID}\\\"}\")
+  # Give deployments some time to succeed.
+sleep 120
+echo "CTT_DEPLOYMENT_UUID: ${CTT_DEPLOYMENT_UUID}"
+
+  # Check SUT Deployment
+export SUT_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${SUT_DEPLOYMENT_URL}\")
+export TI_DEPLOYMENT_HTTP=$(curl -o /dev/null -s -w \"%{http_code}\\n\" \"${TI_DEPLOYMENT_URL}\")
+echo HTTP Codes: SUT ${SUT_DEPLOYMENT_HTTP}, TI ${TI_DEPLOYMENT_HTTP}
+  # CTT: Trigger Execution
+export CTT_EXECUTION_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/execution\" \"{\\\"deployment_uuid\\\":\\\"${CTT_DEPLOYMENT_UUID}\\\"}\")
+sleep 30
+  # CTT: Create Result
+export CTT_RESULT_UUID=$(./curl_uuid.sh \"${CTT_ENDPOINT}/result\" \"{\\\"execution_uuid\\\":\\\"${CTT_EXECUTION_UUID}\\\"}\")
+echo "CTT_RESULT_UUID: ${CTT_RESULT_UUID}"
+
+  # CTT: Obtain Result
+wget "${CTT_ENDPOINT}/result/${CTT_RESULT_UUID}/download" -O "${CTT_RESULT_FILE}" 
+echo "CTT result file available at: `curl -F "file=@${CTT_RESULT_FILE}" "https://file.io/?expires=1w" | jq -e ".link" `"
+ls -al \"${CTT_RESULT_FILE}\"
+set +e
 
 docker logs RadonCTT
