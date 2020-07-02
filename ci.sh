@@ -78,9 +78,10 @@ mkdir -p ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 cp "${SUT_CSAR}" "${TI_CSAR}" "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt" #copy the 2 downloaded test csars from workspace to project dir
 #cp -a  "${WORKSPACE}/demo-ctt-sockshop/radon-ctt/." "${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt" #copy all files from sockshop dir to the project dir
 echo "ls  ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt ..............."
+pwd
 ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
 echo "ls $pwd"
-ls ${CTT_VOLUME}/project/${CTT_PROJECT_UUID}/radon-ctt
+ls 
 
 
 
